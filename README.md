@@ -1,20 +1,15 @@
 # SISTEMA DE GESTION DE MARCACIONES - SGM
-Entorno de Desarrollo del Proyecto de Sistema de Marcacion de Funcionarios.
 
-## Entorno de Desarrollo
-### Base de Datos
-
-### Servidor Nginx
 
 ## Tabla de Contenido
-1. [General Info](#general-info)
-2. [Technologies](#technologies)
-3. [Installation](#installation)
-4. [Collaboration](#collaboration)
-5. [FAQs](#faqs)
-### General Info
+1. [Descripcion](#general-info)
+2. [Tecnologias](#technologies)
+3. [Instalacion](#installation)
+4. [Colaboradores](#collaboration)
+5. [Importar/Exportar](#faqs)
+### Descripcion
 ***
-Write down the general informations of your project. It is worth to always put a project status in the Readme file. This is where you can add it. 
+Entorno de Desarrollo del Proyecto de Sistema de Marcacion de Funcionarios.
 ### Screenshot
 ![Image text](https://www.united-internet.de/fileadmin/user_upload/Brands/Downloads/Logo_IONOS_by.jpg)
 ## Technologies
