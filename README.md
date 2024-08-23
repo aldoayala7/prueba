@@ -2,31 +2,91 @@
 
 
 ## Tabla de Contenido
-1. [Descripcion](#general-info)
-2. [Tecnologias](#technologies)
-3. [Instalacion](#installation)
-4. [Colaboradores](#collaboration)
-5. [Importar/Exportar](#faqs)
+1. [Descripcion](#descripcion)
+2. [Tecnologias](#tecnologias)
+3. [Configuracion Entorno](#configuracion-entorno)
+4. [Clonar Proyecto](#importar-proyecto)
+5. [Colaboradores](#colaboradores)
+6. [Preguntas](#faqs)
 ### Descripcion
-***
 Entorno de Desarrollo del Proyecto de Sistema de Marcacion de Funcionarios.
 ### Screenshot
 ![Image text](https://www.united-internet.de/fileadmin/user_upload/Brands/Downloads/Logo_IONOS_by.jpg)
-## Technologies
 ***
-A list of technologies used within the project:
-* [Technologie name](https://example.com): Version 12.3 
-* [Technologie name](https://example.com): Version 2.34
-* [Library name](https://example.com): Version 1234
-## Installation
+## Tecnologias
+Listado de Tecnologias usados en el proyecto:
+* [Postgresql](https://www.postgresql.org/download/): Version 16.4 
+* [PHP](https://www.php.net/downloads): Version 8.3.6
+* [Ngix](https://nginx.org/en/download.html): Version 1234
+* [Composer](https://getcomposer.org/download/): Version 2.7.7
+* [Symfony](https://symfony.com/download): Version 7.1.3
 ***
-A little intro about the installation. 
+## Configuracion Entorno
+#### Postgresql
+-Creacion de usuario ```user_sgm``` para la Base de Datos ```sgm```, esta configuracion servira como un estandar en las conexiones al motor de base de datos.
+```
+CREATE USER user_sgm WITH PASSWORD '.us3r*r00t..';
+
+CREATE DATABASE sgm OWNER user_sgm; 
+```
+***
+#### Servidor Nginx
+-Configuracion de Host Virtual 
+
+Cambia al directorio donde se encuentran las configuraciones de sitios de Nginx. ```cd /etc/nginx/sites-available/ ```
+Abre un editor de texto para editar el archivo de configuración del host virtual de Symfony. ```vi etc/nginx/sites-available/nombre_dominio``` 
+Agregar el contenido al archivo dominio, que configura un host virtual para servir el proyecto Laravel.
+```
+server {
+  listen 81;
+  listen [::]:81;
+  server_name example.com;
+  root /var/www/html/example.com/public;
+ 
+  add_header X-Frame-Options "SAMEORIGIN";
+  add_header X-Content-Type-Options "nosniff";
+ 
+  index index.php;
+ 
+  charset utf-8;
+ 
+   location / {
+      try_files $uri $uri/ /index.php?$query_string;
+   }
+ 
+   location = /favicon.ico { access_log off; log_not_found off; }
+   location = /robots.txt  { access_log off; log_not_found off; }
+ 
+  error_page 404 /index.php;
+ 
+   location ~ \.php$ {
+      fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;
+      fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+      include fastcgi_params;
+      fastcgi_hide_header X-Powered-By;
+   }
+ 
+   location ~ /\.(?!well-known).* {
+      deny all;
+   }
+}
+```
+Habilita el archivo creado para el directorio ```/etc/nginx/sites-enabled``` 
+```
+sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
+```
+
+Verifica la sintaxis de los archivos de configuración de Nginx para asegurar que no haya errores. ```sudo nginx -t```
+
+Recarga Nginx para aplicar los cambios realizados en su configuración. ```sudo systemctl restart nginx```
+***
 ```
 $ git clone https://example.com
 $ cd ../path/to/the/file
 $ npm install
 $ npm start
 ```
+***
 Side information: To use the application in a special environment use ```lorem ipsum``` to start
 ## Collaboration
 ***
